@@ -1,6 +1,4 @@
-package de.oliverpabst;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+package de.oliverpabst.adts;
 
 import java.util.ArrayList;
 
@@ -8,7 +6,7 @@ public class BinaryTree<T> {
 
     private int size = 0;
 
-    BinaryTreeNode<T> root;
+    private BinaryTreeNode<T> root;
 
     public BinaryTree() {
         root = new BinaryTreeNode<T>(null, null, null, null);
@@ -28,12 +26,12 @@ public class BinaryTree<T> {
     }
 
     public ArrayList<BinaryTreeNode<T>> getPositions() {
-        new NotImplementedException();
+        //new NotImplementedException();
         return null;
     }
 
     public ArrayList<T> getContents() {
-        new NotImplementedException();
+        //new NotImplementedException();
         return null;
     }
 

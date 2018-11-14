@@ -1,4 +1,4 @@
-package de.oliverpabst;
+package de.oliverpabst.adts;
 
 public class BinaryTreeNode<T> {
 
@@ -7,8 +7,11 @@ public class BinaryTreeNode<T> {
     private BinaryTreeNode<T> leftChild;
     private BinaryTreeNode<T> rightChild;
 
-    public BinaryTreeNode(T content, BinaryTreeNode<T> parent, BinaryTreeNode<T> leftChild, BinaryTreeNode<T> rightChild)  {
-
+    public BinaryTreeNode(T _content, BinaryTreeNode<T> _parent, BinaryTreeNode<T> _leftChild, BinaryTreeNode<T> _rightChild)  {
+        content = _content;
+        parent = _parent;
+        leftChild = _leftChild;
+        rightChild = _rightChild;
     }
 
     public T getContent() {
@@ -41,5 +44,13 @@ public class BinaryTreeNode<T> {
 
     public void setRightChild(BinaryTreeNode node) {
         rightChild = node;
+    }
+
+    public String toString() {
+        if (content != null) {
+            return content.toString();
+        } else {
+            return "none";
+        }
     }
 }
