@@ -1,10 +1,7 @@
 package de.oliverpabst;
 
 import de.oliverpabst.adts.BinaryTree;
-import de.oliverpabst.runs.EulerRun;
-import de.oliverpabst.runs.LevelorderRun;
-import de.oliverpabst.runs.PostorderRun;
-import de.oliverpabst.runs.PreorderRun;
+import de.oliverpabst.runs.*;
 
 public class Runner {
     public static void main(String[] args) {
@@ -49,5 +46,13 @@ public class Runner {
 
         System.out.println("Postorder-Iter-Durchlauf");
         por.postorderIter(tree, tree.getRoot());
+
+
+        System.out.println("Inorder-Durchlauf");
+        InorderRun<String> ir = new InorderRun<>();
+        ir.inorder(tree, tree.getRoot());
+
+        System.out.println("Inorder-Iter-Durchlauf");
+        ir.inorderIter(tree, tree.getRoot());
     }
 }
