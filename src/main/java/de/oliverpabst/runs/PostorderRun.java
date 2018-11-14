@@ -2,6 +2,7 @@ package de.oliverpabst.runs;
 
 import de.oliverpabst.adts.BinaryTree;
 import de.oliverpabst.adts.BinaryTreeNode;
+import de.oliverpabst.adts.KeyValue;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -16,20 +17,20 @@ public class PostorderRun<T>
         System.out.println(startNode.toString());
     }
 
-    // TODO: fixme
     public void postorderIter(BinaryTree<T> tree, BinaryTreeNode<T> startNode) {
-        Stack<BinaryTreeNode<T>> s = new Stack<>();
-        s.push(startNode);
-        while(s.isEmpty()) {
-            BinaryTreeNode<T> node = s.pop();
-            if(tree.isExternal(node)) {
-                System.out.println(node.toString());
+        Stack<KeyValue<BinaryTreeNode<T>, PostorderDirection>> s = new Stack<>();
+        s.push(new KeyValue<>(startNode, PostorderDirection.DOWN));
+        while(!s.isEmpty()) {
+            KeyValue<BinaryTreeNode<T>, PostorderDirection> item = s.pop();
+            if(item.getValue().equals(PostorderDirection.UP)) {
+                System.out.println(item.getKey().toString());
+            } else if (tree.isInternal(item.getKey())){
+                s.push(new KeyValue<>(item.getKey(), PostorderDirection.UP));
+                s.push(new KeyValue<>(tree.getRightChild(item.getKey()), PostorderDirection.DOWN));
+                s.push(new KeyValue<>(tree.getLeftChild(item.getKey()), PostorderDirection.DOWN));
+            } else if (tree.isExternal(item.getKey())) {
+                System.out.println(item.getKey().toString());
             }
-            s.push(node);
-            s.push(tree.getRightChild(node));
-            s.push(tree.getLeftChild(node));
-
         }
-
     }
 }
