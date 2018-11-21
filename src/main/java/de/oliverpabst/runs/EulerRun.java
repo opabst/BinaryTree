@@ -25,19 +25,23 @@ public class EulerRun<T> {
         while(!s.isEmpty()) {
             KeyValue<BinaryTreeNode<T>, EulerDirection> e = s.pop();
 
+            // Neu erreichter interner Knoten - linkes Kind und aktuellen Knoten für Rückkehr einfügen
             if(e.getValue().equals(EulerDirection.LEFT) && tree.isInternal(e.getKey())) {
-                s.push(new KeyValue<BinaryTreeNode<T>, EulerDirection>(tree.getRightChild(e.getKey()), EulerDirection.LEFT));
-                s.push(new KeyValue<BinaryTreeNode<T>, EulerDirection>(e.getKey(), EulerDirection.UP));
-                s.push(new KeyValue<BinaryTreeNode<T>, EulerDirection>(tree.getLeftChild(e.getKey()), EulerDirection.LEFT));
-            } else if (e.getValue().equals(EulerDirection.LEFT) && tree.isExternal(e.getKey())) {
+                s.push(new KeyValue<>(e.getKey(), EulerDirection.DOWN));
+                s.push(new KeyValue<>(tree.getLeftChild(e.getKey()), EulerDirection.LEFT));
+            } // nach Rückkehr in rechten Teilbaum einfügen
+            else if (e.getValue().equals(EulerDirection.DOWN)) {
                 System.out.println(e.getKey().toString());
-            } else if(e.getValue().equals(EulerDirection.RIGHT) && tree.isExternal(e.getKey())) {
-                System.out.println(e.getKey().toString())
-;           } else if (e.getValue().equals(EulerDirection.UP)) {
+                s.push(new KeyValue<>(tree.getRightChild(e.getKey()), EulerDirection.LEFT));
+                s.push(new KeyValue<>(e.getKey(), EulerDirection.RIGHT));
+            }
+            // Von rechts aufsteigen in Baum
+            else if(e.getValue().equals(EulerDirection.RIGHT)) {
+                // nichts machen
+            }
+            // linkes Blatt - ausgeben
+            else if (e.getValue().equals(EulerDirection.RIGHT) && tree.isExternal(e.getKey())) {
                 System.out.println(e.getKey().toString());
-            } else if (e.getValue().equals(EulerDirection.RIGHT)) {
-                System.out.println(e.getKey().toString());
-                s.push(new KeyValue<BinaryTreeNode<T>, EulerDirection>(tree.getParent(e.getKey()), EulerDirection.RIGHT));
             }
 
         }

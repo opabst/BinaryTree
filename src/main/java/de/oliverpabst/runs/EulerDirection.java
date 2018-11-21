@@ -1,5 +1,5 @@
 package de.oliverpabst.runs;
 
 public enum EulerDirection {
-    LEFT, UP, RIGHT
+    LEFT, DOWN, RIGHT
 }
